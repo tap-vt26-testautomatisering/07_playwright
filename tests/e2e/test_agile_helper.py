@@ -40,3 +40,14 @@ def test_read_sprint_retrospective(page: Page):
 
     expect(heading).to_be_visible()
 
+
+# AK: Om jag klickar på en annan knapp än "Sista", då ska inte knappen med texten "Sprint retrospective" vara synlig
+
+def test_sprint_retro_navigation(page: Page):
+    page.goto(base_url)
+
+    page.get_by_role("button").get_by_text(re.compile("Första")).click()
+    button = page.get_by_role("button").get_by_text(re.compile("Sprint retrospective"))
+
+    expect(button).not_to_be_visible()
+

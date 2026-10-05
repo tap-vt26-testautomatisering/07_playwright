@@ -1,8 +1,6 @@
 import re
 from playwright.sync_api import Page, expect
 
-base_url = "https://lejonmanen.github.io/agile-helper/"
-
 # User story (US) -> Acceptanskriterier (AK) -> Testscenarier -> E2E-test!
 
 # US1
@@ -24,9 +22,6 @@ base_url = "https://lejonmanen.github.io/agile-helper/"
 # 5. kontrollera att texten i AK2.2 visas
 
 def test_switch_languages(page: Page):
-    # kom ihåg att sätta timeout om du räknar med att något ska ta längre tid än default-värdet i conftest.py
-    page.goto(base_url, timeout=30_000)
-
     swedish_text = page.get_by_text(re.compile("Vilken dag under sprinten"))
     expect(swedish_text).to_be_visible()
 

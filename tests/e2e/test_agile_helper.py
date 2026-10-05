@@ -2,11 +2,11 @@ import re
 # re == reguljära uttryck == "regex"
 from playwright.sync_api import Page, expect
 
-base_url = "https://lejonmanen.github.io/agile-helper/"
+#base_url = "https://lejonmanen.github.io/agile-helper/"
 
 # Vanligt smoke test
 def test_has_title(page: Page):
-    page.goto(base_url)
+#    page.goto(base_url)
     # TODO: flytta page.goto till en gemensam funktion i environment.py i stället - nästa vecka
 
     expect(page).to_have_title(re.compile("Agile helper"))
@@ -28,8 +28,6 @@ def test_has_title(page: Page):
 # Alternativ till pkt 4: välj ut baserat på CSS-klass - fungerar men rekommenderas inte
 
 def test_read_sprint_retrospective(page: Page):
-    page.goto(base_url)
-
     button_locator = page.get_by_role("button")
     button_last = button_locator.get_by_text("Sista")
     button_last.click()
@@ -44,8 +42,6 @@ def test_read_sprint_retrospective(page: Page):
 # AK: Om jag klickar på en annan knapp än "Sista", då ska inte knappen med texten "Sprint retrospective" vara synlig
 
 def test_sprint_retro_navigation(page: Page):
-    page.goto(base_url)
-
     page.get_by_role("button").get_by_text(re.compile("Första")).click()
     button = page.get_by_role("button").get_by_text(re.compile("Sprint retrospective"))
 
